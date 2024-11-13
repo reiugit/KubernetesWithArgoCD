@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application # 'Application' (Anwendung, die in ArgoCD verwaltet wird)
+metadata:
+  name: my-app # Name der Anwendung, wird in der ArgoCD-Oberfläche angezeigt
+  namespace: argocd # ArgoCD Namespace
+spec:
+  project: default # Projekt, in dem die Anwendung definiert ist (default ist das Standardprojekt)
+
+  # Quelle des Repositories, in dem die Anwendung definiert ist
+  source:
+    repoURL: "https://github.com/benutzername/my-repo.git" # URL des Git-Repositorys
+    targetRevision: HEAD # oder zB. 'main', 'master' oder spezifische Branches
+    path: manifests # Pfad zum Ordner, in dem die YAML-Dateien liegen, könnte auch zB. 'k8s' sein
+
+  # Zielcluster und Zielnamespace
+  destination:
+    server: "https://kubernetes.default.svc" # Lokales Cluster, kann auch ein externer Cluster sein
+    namespace: my-app-namespace # Namespace für die Anwendung, muss mit dem Service und dem Deployment übereinstimmen
+
+  # Synchronisierungsrichtlinien
+  syncPolicy:
+    automated: # Automatische Synchronisierung
+      prune: true # Lösche Ressourcen, die nicht mehr in der Quelle definiert sind
+      selfHeal: true # Stelle die Anwendung automatisch wieder her, wenn sie nicht mehr im gewünschten Zustand ist
+      #zB. wenn ein pod manuell geändert wurde, wird er automatisch wieder korrigiert
