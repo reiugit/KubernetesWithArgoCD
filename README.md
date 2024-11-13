@@ -2,6 +2,8 @@
 
 ### argocd-my-app.yaml
 
+In the 'argocd-my-app.yaml' file, the repoURL and path specifiy, where the Kubernetes deployment definition files (mere my-app-k8s.yaml) are located.
+
 <pre>
 apiVersion: argoproj.io/v1alpha1
 kind: Application # 'Application' (Anwendung, die in ArgoCD verwaltet wird)
