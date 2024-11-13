@@ -71,5 +71,4 @@ spec: # Service-Definition
     port: 80 # Port des Services nach außen
     targetPort: 8080 # Port des Ziel-Containers
   type: LoadBalancer # Typ des Services, um externe Zugriffe zu ermöglichen
-
 </pre>
